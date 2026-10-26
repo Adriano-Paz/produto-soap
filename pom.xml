@@ -35,12 +35,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webservices</artifactId>
 		</dependency>
+		
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.3</version>
+        </dependency>
 
-
-		<dependency> 
-		    <groupId>wsdl4j</groupId>
-		    <artifactId>wsdl4j</artifactId>
-		    <version>1.6.3</version>
+		<dependency>
+		     <groupId>org.springframework.ws</groupId>
+		     <artifactId>spring-ws-security</artifactId>
 		</dependency>
 
 		<dependency>
@@ -56,6 +60,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>src/main/resources</schemaDirectory>
+                    <schemaIncludes>
+                        <include>produto.xsd</include>
+                    </schemaIncludes>
+                    <generatePackage>br.gov.sp.cps.produto_soap.schema</generatePackage>
+                </configuration>
+           </plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
