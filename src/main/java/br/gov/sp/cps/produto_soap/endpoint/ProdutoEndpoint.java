@@ -1,12 +1,19 @@
 package br.gov.sp.cps.produto_soap.endpoint;
 
-import br.gov.sp.cps.produto_soap.model.ConsultarProdutoRequest;
-import br.gov.sp.cps.produto_soap.model.ConsultarProdutoResponse;
+//import br.gov.sp.cps.produto_soap.model.ConsultarProdutoRequest;
+//import br.gov.sp.cps.produto_soap.model.ConsultarProdutoResponse;
 
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import br.gov.sp.cps.produto_soap.exception.ProdutoNaoEncontradoException;
+import br.gov.sp.cps.produto_soap.schema.ConsultarProdutoRequest;
+import br.gov.sp.cps.produto_soap.schema.ConsultarProdutoResponse;
+
+
+
 
 @Endpoint
 public class ProdutoEndpoint {
@@ -25,15 +32,9 @@ public class ProdutoEndpoint {
             response.setDescricao("Cereal");
             response.setMarca("Camil");
             response.setQuantidadeEstoque(5);
-
-        } else {
-
-            response.setNome( "Produto não encontrado" );
-            response.setDescricao("-");
-            response.setMarca("-");
-            response.setQuantidadeEstoque(0);
-        }
-
-        return response;
+            return response;
+        } 
+        throw new ProdutoNaoEncontradoException(
+        		"Produto não encontrado: " + request.getCodigo());
     }
 }
